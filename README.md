@@ -44,7 +44,7 @@ A **Flask Variable Inspector** that allows you to **dynamically** browse and ins
 
 1. **Clone the Repository** (or copy the relevant files into your existing Flask app):
    ```bash
-   git clone https://github.com/YourUsername/YourRepoName.git
+   gh repo clone carstenbund/flask_varinspector
    ```
 2. **Install Dependencies**:
    ```bash
