@@ -102,6 +102,7 @@ http://localhost:5000/varinspector
 
 ```python
 # app.py
+
 from flask import Flask
 from flask_varinspector import create_varinspector_blueprint
 
@@ -110,19 +111,29 @@ app = Flask(__name__)
 app.config['VARINSPECTOR_ENABLED'] = True
 app.config['ENV'] = 'development'
 
-# Suppose you have variables to inspect
-my_list = [1, 2, 3]
+my_arr = [10, 20, 30]
 my_dict = {"a": 10, "b": 20}
 
-# Put them in a dictionary for the inspector
+secret_key = "supersecret"
+app_var = app  # referencing the Flask app itself as a variable
+
 variables_to_inspect = {
-    'my_list': my_list,
+    'my_arr': my_arr,
+    'secret_key': secret_key,
+    'app': app_var,
     'my_dict': my_dict
 }
 
-# Create and register the inspector blueprint
-inspector_bp = create_varinspector_blueprint(app_globals=variables_to_inspect)
-app.register_blueprint(inspector_bp)
+varinspector_bp = create_varinspector_blueprint(
+    app_globals=variables_to_inspect,
+    include_vars=['my_arr', 'app', 'my_dict']
+    # exclude_vars=['secret_key']  # you can exclude if you prefer
+)
+app.register_blueprint(varinspector_bp)
+
+@app.route('/')
+def home():
+    return "Hello, Flask Variable Inspector!"
 
 if __name__ == '__main__':
     app.run(debug=True)
