@@ -1,0 +1,40 @@
+<!-- varinspector/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Variable Inspector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        ul { 
+            list-style-type: none; 
+            padding-left: 20px;
+        }
+        .variable { 
+            cursor: pointer; 
+            color: blue; 
+            text-decoration: underline; 
+        }
+        .details { 
+            margin-left: 20px; 
+            display: none; 
+        }
+        .expanded > .details {
+            display: block;
+        }
+        .loading {
+            color: gray;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Variable Inspector</h1>
+    <ul id="globals-list"></ul>
+
+    <!-- Include the final JS -->
+    <script src="{{ url_for('varinspector.static', filename='varinspector/varinspector.js') }}"></script>
+</body>
+</html>
